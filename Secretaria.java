@@ -1,15 +1,17 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;;
 
 class Secretaria extends Pessoa{
 
     private float salario;
     private LocalDate DataIngressoNoConsultorio;
+    private float valorRecebidoDaConsulta;
 
-    public Secretaria(String nome, String endereco, String numeroTelefone, String dataNascimento,float salario, String ingressoNoConsultorio){
-        super(nome, endereco, numeroTelefone, dataNascimento);
-        this.salario = salario;
-        this.DataIngressoNoConsultorio = LocalDate.now();
+    public Secretaria(String nome, String cpf, String endereco, String numeroTelefone, String dataNascimento,float salario){
+        super(nome, cpf, endereco, numeroTelefone, dataNascimento);
+        setSalario(salario);
+        DataIngressoNoConsultorio = LocalDate.now();
         
     }
 
@@ -17,34 +19,47 @@ class Secretaria extends Pessoa{
         return salario;
     }
 
-    void receberPagamento(float pagamento){
-        Consultorio.saldoContaConsultorio += pagamento;
+    public void setSalario(float salario) {
+        this.salario = salario;
+    }
+
+    public float getValorRecebidoDaConsulta(){
+        float tmp = valorRecebidoDaConsulta;
+        valorRecebidoDaConsulta = 0;
+        return tmp;
+    }
+
+    public void setValorRecebidoDaConsulta(float pagamento){
+        valorRecebidoDaConsulta = pagamento;
     }
 
 
-    void marcarConsultar(){}
+    void alterarDadosPaciente(tipoDoDado tipoDado, String novoDadoTrocar, Paciente paciente){
 
-    public ArrayList<Consultas> alterarStatusConsulta(ArrayList<Consultas> consultas, String cpf){
-        
-        consultas.forEach(consulta -> {
-            if(consulta.getCpfPaciente().equals(cpf)){
-                consulta.alterarStatusDaConsulta(alterarStatus);
-            }
-        });
-        //Pensei em pegar a consulta do consultorio, remove, modificar e
-        // fazer um add colocando ela no começo, oq isso traria de ruim
-        // seria que os IDs ficariam quebrados
-        return consulta;
+        switch (tipoDado) {
+            case NOME:
+                paciente.setNome(novoDadoTrocar);
+                break;
+            case ENDERECO:
+                paciente.setEndereco(novoDadoTrocar);
+                break;
+            case NUMERO_TELEFONE:
+                paciente.setNumeroTelefone(novoDadoTrocar);
+                break;
+            case DATA_NASCIMENTO:
+                paciente.setDataNascimento(novoDadoTrocar);
+                break;
+            case CPF:
+                paciente.setCpf(novoDadoTrocar);
+                break;
+
+        }
+
     }
-    
 
-    void verificarDisponibilidadeMedico(){}
-
-    void cadastrarPaciente(){}
-
-    void alterarDadosPaciente(){}
-
-    
+    public enum tipoDoDado{
+        NOME, ENDERECO, NUMERO_TELEFONE, DATA_NASCIMENTO, CPF
+    }
 
 
 

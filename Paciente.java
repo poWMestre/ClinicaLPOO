@@ -1,25 +1,33 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 class Paciente extends Pessoa{
 
-    private String cpf;
-    private final int IdPaciente;
 
-   public Paciente(String nome, String endereco, String numeroTelefone, String dataNascimento,float salario, String ingressoNoConsultorio, String CPF){
-        super(nome, endereco, numeroTelefone, dataNascimento);
-        this.cpf = CPF;
-        this.IdPaciente = Consultorio.quantidadePacientes + 1;
+   public Paciente(String nome, String cpf, String endereco, String numeroTelefone, String dataNascimento){
+        super(nome, cpf, endereco, numeroTelefone, dataNascimento);
     }
-    
 
-
-    void agendamentoDeConsulta(){}
-
-    void visualizarReceitas(){}
-
-    void visualizarExame(){}
-
-    public String getCPF(){
-        return cpf;
+    public boolean solicitarAgendamentoConsulta(){
+        return true;
     }
+
+    void visualizarReceitas(ArrayList<String> receitas){
+
+       for(String receita : receitas){
+           System.out.println("================== RECEITA MEDICA ==================");
+           System.out.println(receita);
+           System.out.println("====================================================");
+       }
+    }
+
+    void visualizarExames(ArrayList<String> exames){
+        for(String exame : exames){
+            System.out.println("======================= EXAME =======================");
+            System.out.println(exame);
+            System.out.println("=====================================================");
+        }
+    }
+
+
 }
