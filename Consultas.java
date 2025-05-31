@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -5,7 +6,7 @@ public class Consultas{
 
     private final int idConsulta;
     private String MedicoDisponivel;
-    private LocalDateTime dataDaConsulta;
+    private LocalDate dataDaConsulta;
     // Status da consulta seria agendado, cancelado, finalizado
     private String statusConsulta;
     private Paciente paciente;
@@ -15,13 +16,17 @@ public class Consultas{
 
 
     public Consultas(String nomeMedico, int idDaConsulta){
-        this.dataDaConsulta = LocalDateTime.now();
+        this.dataDaConsulta = LocalDate.now();
         this.MedicoDisponivel = nomeMedico;
         idConsulta = idDaConsulta;
     }
 
     public void setPaciente(Paciente paciente){
         this.paciente = paciente;
+    }
+
+    public Paciente getPaciente(){
+        return paciente;
     }
 
     public void setStatusConsulta(statusMudarConsulta mudarStatus){
@@ -45,7 +50,7 @@ public class Consultas{
         this.MedicoDisponivel = nomeMedico;
     }
 
-    public void setDataDaConsulta(LocalDateTime novaData){
+    public void setDataDaConsulta(LocalDate novaData){
         this.dataDaConsulta = novaData;
     }
     public void setReceitaMedica(String informacaoReceitaMedica){
@@ -64,9 +69,17 @@ public class Consultas{
         receitaMedica.add(examesPedidos);
     }
 
-    public enum statusMudarConsulta {
-        AGENDADO, CANCELADO, FINALIZADO
-    }
+    //public enum statusMudarConsulta {
+       // AGENDADO, CANCELADO, FINALIZADO
+    //}
+
+    //public String solicitarExames(){
+        
+    //}
+
+    //public String inserirReceita(){
+        
+    //}
 
 }
 

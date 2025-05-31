@@ -6,19 +6,19 @@ public abstract class Pessoa{
     private String dataNascimento;
     private String cpf;
 
-    protected Pessoa(String nome, String cpf){
+    public Pessoa(String nome, String cpf){
         this(nome, cpf, null, null, null);
 
     }
 
-    protected Pessoa(String nome, String cpf, String endereco){
+    public Pessoa(String nome, String cpf, String endereco){
         this(nome, cpf, endereco, null, null);
 
     }
-    protected Pessoa(String nome,String  cpf, String endereco, String telefone){
+    public Pessoa(String nome,String  cpf, String endereco, String telefone){
         this(nome, cpf, endereco, telefone,  null);
     }
-    protected Pessoa(String nome, String cpf,String endereco, String telefone, String dataNascimento){
+    public Pessoa(String nome, String cpf,String endereco, String telefone, String dataNascimento){
 
         setCpf(cpf);
         setNome(nome);

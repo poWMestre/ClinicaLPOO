@@ -1,4 +1,4 @@
-class validar{
+public class validar<T>{
     public void validarNome(){}
     public void validarEndereco(){}
     public void validarTelefone(){}
