@@ -1,29 +1,46 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 
 public class Consultas{
 
-    private final int idConsulta;
-    private String MedicoDisponivel;
-    private LocalDate dataDaConsulta;
+    private final long idConsulta;
+    private Medico medicoDaConsulta;
+    private LocalDateTime dataDaConsulta;
+    private float valorDaConsulta;
+    private String sintomas;
     // Status da consulta seria agendado, cancelado, finalizado
     private String statusConsulta;
     private Paciente paciente;
-    private ArrayList<String> receitaMedica;
-    private ArrayList<String> examesPedidos;
+    private List<String> receitaMedica;
+    private List<String> exames;
 
 
 
-    public Consultas(String nomeMedico, int idDaConsulta){
-        this.dataDaConsulta = LocalDate.now();
-        this.MedicoDisponivel = nomeMedico;
-        idConsulta = idDaConsulta;
-    }
-
-    public void setPaciente(Paciente paciente){
+    public Consultas(Medico nomeMedico, Paciente paciente, LocalDateTime dataConsulta, String sintomas){
+        idConsulta = ++Consultorio.quantidadeConsultas;
+        this.medicoDaConsulta = nomeMedico;
+        this.dataDaConsulta = dataConsulta;
         this.paciente = paciente;
+        setSintomas(sintomas);
+
+        receitaMedica = new ArrayList<>();
+        exames = new ArrayList<>();
     }
+
+    public String getSintomas() {
+        return sintomas;
+    }
+
+    public float getValorDaConsulta() {
+        return valorDaConsulta;
+    }
+
+    public Medico getMedicoDaConsulta() {
+        return medicoDaConsulta;
+    }
+
 
     public Paciente getPaciente(){
         return paciente;
@@ -46,40 +63,58 @@ public class Consultas{
 
     }
 
-    public void setNomeMedico(String nomeMedico){
-        this.MedicoDisponivel = nomeMedico;
+    public enum statusMudarConsulta {
+        AGENDADO, CANCELADO, FINALIZADO
     }
 
-    public void setDataDaConsulta(LocalDate novaData){
-        this.dataDaConsulta = novaData;
+    public LocalDateTime getDataDaConsulta() {
+        return dataDaConsulta;
     }
-    public void setReceitaMedica(String informacaoReceitaMedica){
+
+    public void setSintomas(String sintomas) {
+        validar.validarString(sintomas);
+        this.sintomas = sintomas;
+    }
+
+    public void setDataDaConsulta(LocalDateTime dataDaConsulta) {
+        
+        validar.validarDataHora(dataDaConsulta);
+
+        this.dataDaConsulta = dataDaConsulta;
+    }
+
+    public void setValorDaConsulta(float valorDaConsulta) {
+        validar.validarValores(valorDaConsulta);
+        this.valorDaConsulta = valorDaConsulta;
+    }
+
+    public void setReceita(String informacaoReceitaMedica){
+        validar.validarString(informacaoReceitaMedica);
         receitaMedica.add(informacaoReceitaMedica);
     }
 
-    public ArrayList<String> getReceitaMedica(){
-        return receitaMedica;
+    public void setExames(String exames) {
+        validar.validarString(exames);
+        receitaMedica.add(exames);
     }
 
-    public ArrayList<String> getExamesPedidos() {
-        return examesPedidos;
+    public void setExames(String... exames) {
+        for(String exame : exames){
+            setExames(exame);
+        }
     }
 
-    public void setExamesPedidos(String examesPedidos) {
-        receitaMedica.add(examesPedidos);
+    public List<String> getReceita(){
+        return Collections.unmodifiableList(receitaMedica);
     }
 
-    //public enum statusMudarConsulta {
-       // AGENDADO, CANCELADO, FINALIZADO
-    //}
+    public List<String> getExames() {
+        return Collections.unmodifiableList(exames);
+    }
 
-    //public String solicitarExames(){
-        
-    //}
-
-    //public String inserirReceita(){
-        
-    //}
+    public long getIdConsulta(){
+        return idConsulta;
+    }
 
 }
 

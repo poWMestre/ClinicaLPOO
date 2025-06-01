@@ -34,6 +34,8 @@ class Medico extends Pessoa{
     }
 
     public void setCrm(String crm) {
+        validar.validarString(crm);
+        validar.validarCRM(crm);
         this.crm = crm;
     }
 

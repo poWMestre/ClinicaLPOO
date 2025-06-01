@@ -1,3 +1,4 @@
+
 public abstract class Pessoa{
     
     private String nome;
@@ -20,12 +21,13 @@ public abstract class Pessoa{
     }
     public Pessoa(String nome, String cpf,String endereco, String telefone, String dataNascimento){
 
+        
         setCpf(cpf);
         setNome(nome);
         setEndereco(endereco);
         setNumeroTelefone(telefone);
         setDataNascimento(dataNascimento);
-
+        
         //VALIDAR OS ATRIBUTOS
     }
 
@@ -48,20 +50,30 @@ public abstract class Pessoa{
     }
 
     public void setNome(String nome){
+        validar.validarString(nome);
+        validar.validarNome(nome);
         this.nome = nome;
     }
     public void setEndereco(String endereco){
+        validar.validarString(endereco);
+        validar.validarEndereco(endereco);
         this.endereco = endereco;
     }
     public void setNumeroTelefone(String numeroTelefone){
+        validar.validarString(numeroTelefone);
+        validar.validarTelefone(numeroTelefone);
         this.numeroTelefone = numeroTelefone;
     }
 
     public void setDataNascimento(String dataNascimento){
+        validar.validarString(dataNascimento);
+        validar.validarDataNascimento(dataNascimento);
         this.dataNascimento = dataNascimento;
     }
 
     public void setCpf(String cpf) {
+        validar.validarString(cpf);
+        validar.validarCPF(cpf);
         this.cpf = cpf;
     }
 }
